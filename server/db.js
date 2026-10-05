@@ -1,0 +1,110 @@
+// In-memory database: all data is lost when the server restarts.
+
+export const lookups = {
+  types: [
+    { code: 'DSC_BB', name: 'Discharge - Break Bulk', activity: 'BB' },
+    { code: 'DSC_CT', name: 'Discharge - Container', activity: 'CT' },
+    { code: 'DSC_RF', name: 'Discharge - Reefer', activity: 'RF' },
+  ],
+  carriers: [
+    { code: '00000000', name: 'CMA CGM' },
+    { code: '00000001', name: 'APL' },
+    { code: '00000002', name: 'ANL' },
+    { code: '00000003', name: 'CNC' },
+    { code: '00000004', name: 'Mercosul Line' },
+  ],
+  branches: [
+    { code: 'FRMRS', name: 'Marseille Head Office' },
+    { code: 'FRPAR', name: 'Paris Branch' },
+    { code: 'CNSHA', name: 'Shanghai Branch' },
+    { code: 'SGSIN', name: 'Singapore Branch' },
+    { code: 'USNYC', name: 'New York Branch' },
+  ],
+  businessPartners: [
+    { code: '0000100001', name: 'Global Freight SAS', owner: 'Marie Dupont', territory: 'EMEA - France' },
+    { code: '0000100002', name: 'Oceanic Logistics Ltd', owner: 'John Smith', territory: 'EMEA - UK' },
+    { code: '0000100003', name: 'Shanghai Trading Co.', owner: 'Li Wei', territory: 'APAC - China' },
+    { code: '0000100004', name: 'Atlantic Imports Inc.', owner: 'Sarah Johnson', territory: 'AMERICAS - USA' },
+    { code: '0000100005', name: 'Mediterranean Forwarding', owner: 'Luca Rossi', territory: 'EMEA - Italy' },
+    { code: '0000100006', name: 'Singapore Shipping Pte', owner: 'Tan Ah Kow', territory: 'APAC - Singapore' },
+  ],
+  contracts: [
+    { code: 'CT2026000001', name: 'FAK Asia - Europe 2026', holder: '0000100001', dcdBp: '0000100003' },
+    { code: 'CT2026000002', name: 'Transatlantic Breakbulk', holder: '0000100004', dcdBp: '0000100002' },
+    { code: 'CT2026000003', name: 'Med Short Sea', holder: '0000100005', dcdBp: '0000100001' },
+  ],
+  offices: [
+    { code: 'MRS01', name: 'Marseille Booking Office' },
+    { code: 'SHA01', name: 'Shanghai Booking Office' },
+    { code: 'NYC01', name: 'New York Booking Office' },
+    { code: 'SIN01', name: 'Singapore Booking Office' },
+  ],
+  zones: [
+    { code: 'MED', name: 'Mediterranean' },
+    { code: 'NEU', name: 'North Europe' },
+    { code: 'ASI', name: 'Asia' },
+    { code: 'NAM', name: 'North America' },
+    { code: 'SAM', name: 'South America' },
+    { code: 'AFR', name: 'Africa' },
+    { code: 'MEA', name: 'Middle East' },
+  ],
+  countries: [
+    { code: 'FR', name: 'France' },
+    { code: 'IT', name: 'Italy' },
+    { code: 'GB', name: 'United Kingdom' },
+    { code: 'CN', name: 'China' },
+    { code: 'SG', name: 'Singapore' },
+    { code: 'US', name: 'United States' },
+    { code: 'BR', name: 'Brazil' },
+    { code: 'MA', name: 'Morocco' },
+  ],
+  points: [
+    { code: 'FRMRS', name: 'Marseille', country: 'FR' },
+    { code: 'FRLEH', name: 'Le Havre', country: 'FR' },
+    { code: 'ITGOA', name: 'Genoa', country: 'IT' },
+    { code: 'GBSOU', name: 'Southampton', country: 'GB' },
+    { code: 'CNSHA', name: 'Shanghai', country: 'CN' },
+    { code: 'CNNGB', name: 'Ningbo', country: 'CN' },
+    { code: 'SGSIN', name: 'Singapore', country: 'SG' },
+    { code: 'USNYC', name: 'New York', country: 'US' },
+    { code: 'BRSSZ', name: 'Santos', country: 'BR' },
+    { code: 'MATNG', name: 'Tanger Med', country: 'MA' },
+  ],
+};
+
+let sequence = 1000;
+export const nextId = () => String(++sequence);
+
+const now = new Date().toISOString();
+export const rules = [
+  {
+    id: nextId(),
+    status: 'Active',
+    type: 'DSC_BB',
+    blSpecific: 'No',
+    carrier: '00000000',
+    effectiveDate: '2026-01-01',
+    expireDate: '2026-12-31',
+    requestorId: 'S00000001',
+    requestorName: 'Demo User',
+    requestorBranch: 'FRMRS',
+    createDate: now,
+    lastUpdate: now,
+    comments: 'Sample rule',
+    salesCreditBp: '0000100001',
+    contractHolder: '0000100001',
+    contractNumber: 'CT2026000001',
+    bookingOffice: 'SHA01',
+    polZone: 'ASI',
+    originCountry: 'CN',
+    originPoint: 'CNSHA',
+    podZone: 'MED',
+    destCountry: 'FR',
+    destPoint: 'FRMRS',
+    shipperBp: '0000100003',
+    forwarderBp: '',
+    consigneeBp: '0000100001',
+    notifyBp: '',
+    blNumber: '',
+  },
+];
